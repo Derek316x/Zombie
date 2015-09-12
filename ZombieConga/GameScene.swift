@@ -8,7 +8,6 @@
 
 import SpriteKit
 
-//Everything that appears on the screen in SpriteKit derives from the SKNode class
 class GameScene: SKScene {
     
     let zombie1 = SKSpriteNode(imageNamed: "zombie1");
@@ -66,13 +65,12 @@ class GameScene: SKScene {
         //zombie stuff
         zombie1.position = CGPoint(x: 400, y: 400)
         addChild(zombie1)
-        //zombie1.runAction(SKAction.repeatActionForever(zombieAnimation))
         
         //spawn enemy every 2 seconds
         runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnEnemy),SKAction.waitForDuration(2.0)])))
         
         //spawn cats!
-    runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnCat),SKAction.waitForDuration(1.0)])))
+        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnCat),SKAction.waitForDuration(1.0)])))
         
         debugDrawPlayableArea()
     }
@@ -117,11 +115,9 @@ class GameScene: SKScene {
         
         //unit vector
         let direction = offset.normalized()
-//        print("\(direction)")
         
         //velocity vector
         velocity = direction * CGFloat(zombieMovePointsPerSec)
-//        print("\(velocity)")
     }
 
     func boundsCheckZombie(){
@@ -153,7 +149,6 @@ class GameScene: SKScene {
     //MARK: Sprite methods
     func moveSprite(sprite: SKSpriteNode, velocity: CGPoint){
         let amountToMove = velocity * CGFloat(dt)
-//        print("amount to move: \(amountToMove)")
         sprite.position += amountToMove
     }
     
@@ -162,9 +157,6 @@ class GameScene: SKScene {
         
         let amountToRotate = min(rotateRadiansPerSec * CGFloat(dt), abs(shortest))
         sprite.zRotation += shortest.sign() * amountToRotate
-   
-//        let degrees = zombie1.zRotation * CGFloat((180/M_PI))
-//        print("rotation: \(degrees)")
     }
     
     //MARK: spawn methods
@@ -267,7 +259,6 @@ class GameScene: SKScene {
         }
         
     }
-    
     
     //MARK: animation methods
     func startZombieAnimation(){
