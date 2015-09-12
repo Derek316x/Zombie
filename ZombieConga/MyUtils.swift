@@ -67,17 +67,47 @@ func sqrt(a: CGFloat) -> CGFloat {
 }
 #endif
 
+let pi = CGFloat(M_PI)
+func shortestAngleBetweenTwoAngles(angle1: CGFloat, angle2:CGFloat) -> CGFloat{
+    let twoPi = pi * 2
+    
+    var angle = (angle2 - angle1) % twoPi
+    
+    if angle > pi {
+        angle -= twoPi
+    }
+    if angle < -pi{
+        angle += twoPi
+    }
+    return angle
+}
+
 extension CGPoint {
-  
-  func length() -> CGFloat {
-    return sqrt(x*x + y*y)
-  }
-  
-  func normalized() -> CGPoint {
-    return self / length()
-  }
-  
-  var angle: CGFloat {
-    return atan2(y, x)
-  }
+    
+    var angle: CGFloat {
+        return atan2(y, x)
+    }
+    
+    func length() -> CGFloat {
+        return sqrt(x*x + y*y)
+    }
+    
+    func normalized() -> CGPoint {
+        return self / length()
+    }
+}
+
+extension CGFloat {
+    func sign() -> CGFloat{
+        return (self >= 0.0) ? 1.0 : -1.0
+    }
+    
+    static func random() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UInt32.max))
+    }
+    
+    static func random(min min: CGFloat, max: CGFloat) -> CGFloat {
+        assert(min < max)
+        return CGFloat.random() * (max - min) + min
+    }
 }
